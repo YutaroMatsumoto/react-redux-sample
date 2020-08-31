@@ -2,9 +2,16 @@ import React, { Component } from 'react';
 
 class App extends Component {
   render() {
+    // const greeting = "Hiiii!";
+    // const dom = <h1 className="foo">{greeting}</h1>;
+    // return dom;
+
     return (
-      <h1>Hello World!</h1>
-    );
+      <React.Fragment>
+        <label htmlFor="bar">bar</label>
+        <input type="text" onChange={() => {console.log("I am Clicked")}}/>
+      </React.Fragment>
+    )
   }
 }
 
