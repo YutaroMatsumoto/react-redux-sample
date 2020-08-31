@@ -6,6 +6,8 @@ class App extends Component {
     // const dom = <h1 className="foo">{greeting}</h1>;
     // return dom;
 
+    // jsxはbabelがjsに変換してくれている
+
     return (
       <React.Fragment>
         <label htmlFor="bar">bar</label>
