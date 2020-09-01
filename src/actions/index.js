@@ -1,6 +1,9 @@
+// これはactionを定義して、actionをreturnする関数つまり、actioncreatorを定義した。
+// 「あるイベントをつかんだ時に、当該のactioncreatorをimportして、適切な状態遷移を実行させるための
+// 仕組みを行っている」と理解しておく
 // actionとはjavascriptのオブジェクトのこと
 // typeというkeyと、typeに対応する値を持つという特徴がある
-// actionを返す関数のことを"ActionCreater"と呼ぶ
+// actionを返す関数のことを"Actioncreator"と呼ぶ
 
 // 
 // export const increment = () => {
@@ -14,9 +17,9 @@ export const INCREMENT = 'INCREMENT'
 export const DECREMENT = 'DECREMENT'
 
 export const increment = () => ({
-    type: 'INCREMENT'
+    type: INCREMENT
 })
 
 export const decrement = () => ({
-    type: 'DECREMENT'
+    type: DECREMENT
 })
