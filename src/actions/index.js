@@ -1,4 +1,4 @@
-// これはactionを定義して、actionをreturnする関数つまり、actioncreatorを定義した。
+// これはactionを定義して、actionをreturnする関数。つまり、actioncreatorを定義した。
 // 「あるイベントをつかんだ時に、当該のactioncreatorをimportして、適切な状態遷移を実行させるための
 // 仕組みを行っている」と理解しておく
 // actionとはjavascriptのオブジェクトのこと
@@ -15,6 +15,7 @@
 
 export const INCREMENT = 'INCREMENT'
 export const DECREMENT = 'DECREMENT'
+export const CHANGENAME = 'CHANGENAME'
 
 export const increment = () => ({
     type: INCREMENT
@@ -22,4 +23,8 @@ export const increment = () => ({
 
 export const decrement = () => ({
     type: DECREMENT
+})
+
+export const changename = () => ({
+    type: CHANGENAME
 })

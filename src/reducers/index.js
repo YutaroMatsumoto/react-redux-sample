@@ -1,5 +1,6 @@
 // application内の全てのreducerを結合
 import { combineReducers } from 'redux'
 import count from './count'
+import name from './name'
 
-export default combineReducers({ count, })
+export default combineReducers({ count, name })
