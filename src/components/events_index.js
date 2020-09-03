@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { readEvents } from '../actions/index.js'
 import _ from 'lodash'
+import { Link }　from 'react-router-dom'
 // import PropTypes from 'prop-types';
 
 // const App = () => (<Counter></Counter>)
@@ -45,6 +46,7 @@ class EventsIndex extends Component {
             { this.renderEvents() }
           </tbody>
         </table>
+        <Link to="/events/new">New Event</Link>
       </React.Fragment>
     )
   }
