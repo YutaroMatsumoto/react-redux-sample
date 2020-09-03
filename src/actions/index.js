@@ -5,21 +5,16 @@
 // typeというkeyと、typeに対応する値を持つという特徴がある
 // actionを返す関数のことを"Actioncreator"と呼ぶ
 
-// 
-// export const increment = () => {
-//     return {
-//         type: 'INCREMENT'
-//     }
-// }
-// 下記のように省略可能(returnはカッコをつけて省略できる？)
+// redux thunk
+// redux thunk ミドルウェアを使うことで、actioncreatorが、actionの代わりに関数を返すことができるようになる
+import axios from 'axios'
+export const READ_EVENTS = 'READE_VENTS'
 
-export const INCREMENT = 'INCREMENT'
-export const DECREMENT = 'DECREMENT'
+const ROOT_URL = 'https://udemy-utils.herokuapp.com/api/v1'
+const QUERYSTRING = '?token=token123'
 
-export const increment = () => ({
-    type: INCREMENT
-})
-
-export const decrement = () => ({
-    type: DECREMENT
-})
+export const readEvents = () => async dispatch => {
+    const response = await axios.get(`${ROOT_URL}/events${QUERYSTRING}`)
+    console.log(response)
+    dispatch({ type: READ_EVENTS, response }) // reducerに渡す。これにより、actionはtype, responseのkeyをもつ
+}
