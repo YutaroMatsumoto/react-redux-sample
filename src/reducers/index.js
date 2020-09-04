@@ -1,5 +1,6 @@
 // application内の全てのreducerを結合
 import { combineReducers } from 'redux'
+import { reducer as form } from 'redux-form'
 import events from './events'
 
-export default combineReducers({ events })
+export default combineReducers({ events, form: form })

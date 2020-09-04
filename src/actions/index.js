@@ -9,6 +9,7 @@
 // redux thunk ミドルウェアを使うことで、actioncreatorが、actionの代わりに関数を返すことができるようになる
 import axios from 'axios'
 export const READ_EVENTS = 'READE_VENTS'
+export const CREATE_EVENTS = 'CREATE_EVENTS'
 
 const ROOT_URL = 'https://udemy-utils.herokuapp.com/api/v1'
 const QUERYSTRING = '?token=token123'
@@ -17,4 +18,10 @@ export const readEvents = () => async dispatch => {
     const response = await axios.get(`${ROOT_URL}/events${QUERYSTRING}`)
     console.log(response)
     dispatch({ type: READ_EVENTS, response }) // reducerに渡す。これにより、actionはtype, responseのkeyをもつ
+}
+
+export const postEvent = values => async dispatch => {
+    const response = await axios.post(`${ROOT_URL}/events${QUERYSTRING}`, values)
+    console.log(response)
+    dispatch({ type: CREATE_EVENTS, response }) // reducerに渡す。これにより、actionはtype, responseのkeyをもつ
 }
