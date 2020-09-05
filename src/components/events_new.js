@@ -13,7 +13,7 @@ class EventsNew extends Component {
   }
   renderField(field) {
     console.log('renderfieldです')
-    const { input, label, type, meta: { touched, error } } = field
+    const { input, label, type, meta: { touched, error } } = field // 1回でもformを触ったらtouched状態になる。
 
     return (
       <div>
