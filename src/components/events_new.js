@@ -9,7 +9,7 @@ import { postEvent } from '../actions/index.js'
 class EventsNew extends Component {
   constructor(props) {
     super(props)
-    this.onSubmit = this.onSubmit.bind(this)
+    this.onSubmit = this.onSubmit.bind(this) // onsubmitを上書き？（自分の推測）
   }
   renderField(field) {
     console.log('renderfieldです')
@@ -29,8 +29,12 @@ class EventsNew extends Component {
   }
 
   render() {
-    const { handleSubmit } = this.props
-    console.log('renderです')
+    const { handleSubmit, pristine, submitting } = this.props // このpropsがなんなのか、良くわからない。
+    // submittingはsubmitボタンを押したらtrueになる
+
+    // console.log('前前前前前前前前前前')
+    // console.log(this.props)
+    // console.log('後後後後後後後後後後')
 
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
@@ -38,7 +42,7 @@ class EventsNew extends Component {
         <Field label="Body" name="body" type="text" component={this.renderField} />
 
         <div>
-          <input type="submit" value="Submit" disable="false"/>
+          <input type="submit" value="Submit" disabled={pristine || submitting}/>
           <Link to="/">Cancel</Link>
         </div>
       </form>
