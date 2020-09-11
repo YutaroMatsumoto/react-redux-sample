@@ -10,6 +10,7 @@
 import axios from 'axios'
 export const READ_EVENTS = 'READE_VENTS'
 export const CREATE_EVENTS = 'CREATE_EVENTS'
+export const DELETE_EVENT = 'DELETE_EVENT'
 
 const ROOT_URL = 'https://udemy-utils.herokuapp.com/api/v1'
 const QUERYSTRING = '?token=token123'
@@ -24,4 +25,9 @@ export const postEvent = values => async dispatch => {
     const response = await axios.post(`${ROOT_URL}/events${QUERYSTRING}`, values)
     console.log(response)
     dispatch({ type: CREATE_EVENTS, response }) // reducerに渡す。これにより、actionはtype, responseのkeyをもつ
+}
+
+export const deleteEvent = id => async dispatch => {
+    await axios.delete(`${ROOT_URL}/events/${id}${QUERYSTRING}`)
+    dispatch({ type: DELETE_EVENT, id }) // reducerに渡す。これにより、actionはtype, responseのkeyをもつ
 }
