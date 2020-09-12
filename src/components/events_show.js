@@ -11,8 +11,13 @@ class EventsShow extends Component {
     this.onSubmit = this.onSubmit.bind(this) // onsubmitを上書き？（自分の推測）
     this.onDeleteClick = this.onDeleteClick.bind(this)
   }
+
+  componentDidMount() {
+    const { id } = this.props.match.params
+    if (id) this.props.getEvent(id)
+  }
+
   renderField(field) {
-    console.log('renderfieldです')
     const { input, label, type, meta: { touched, error } } = field // 1回でもformを触ったらtouched状態になる。
 
     return (
@@ -24,19 +29,18 @@ class EventsShow extends Component {
   }
 
   async onSubmit(values) {
-    // await this.props.postEvent(values)
+    await this.props.putEvent(values)
     this.props.history.push('/')
   }
 
   async onDeleteClick() {
     const { id } = this.props.match.params
-    console.log(id)
     await this.props.deleteEvent(id)
     this.props.history.push('/')
   }
 
   render() {
-    const { handleSubmit, pristine, submitting } = this.props // このpropsがなんなのか、良くわからない。
+    const { handleSubmit, pristine, submitting, invalid } = this.props // このpropsがなんなのか、良くわからない。
     // submittingはsubmitボタンを押したらtrueになる
 
     // console.log('前前前前前前前前前前')
@@ -49,7 +53,7 @@ class EventsShow extends Component {
         <Field label="Body" name="body" type="text" component={this.renderField} />
 
         <div>
-          <input type="submit" value="Submit" disabled={pristine || submitting}/>
+          <input type="submit" value="Submit" disabled={pristine || submitting || invalid}/>
           <Link to="/">Cancel</Link>
           <Link to="/" onClick={this.onDeleteClick}>Delete</Link>
         </div>
@@ -58,7 +62,10 @@ class EventsShow extends Component {
   }
 }
 
-// const mapStateToProps = state => ({ events: state.events })
+const mapStateToProps = (state, ownProps) => {
+  const event = state.events[ownProps.match.params.id]
+  return { initialValues: event, state } // 初期状態がinitialValues
+}
 
 // const mapDispatchToProps = dispatch => ({
 //   increment: () => dispatch(increment()),
@@ -68,7 +75,7 @@ class EventsShow extends Component {
 //
 // mapDispatchToPropsは下記のように省略することが可能
 
-const mapDispatchToProps = ({ deleteEvent })
+const mapDispatchToProps = ({ deleteEvent, getEvent, putEvent })
 
 const validate = values => {
   const errors = {}
@@ -77,6 +84,6 @@ const validate = values => {
   return errors
 }
 
-export default connect(null, mapDispatchToProps)(
-  reduxForm({ validate, form: 'eventShowForm' })(EventsShow)
+export default connect(mapStateToProps, mapDispatchToProps)(
+  reduxForm({ validate, form: 'eventShowForm', enableReinitialize: true })(EventsShow)
 )

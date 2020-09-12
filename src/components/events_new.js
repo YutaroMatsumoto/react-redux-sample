@@ -29,7 +29,7 @@ class EventsNew extends Component {
   }
 
   render() {
-    const { handleSubmit, pristine, submitting } = this.props // このpropsがなんなのか、良くわからない。
+    const { handleSubmit, pristine, submitting, invalid } = this.props // このpropsがなんなのか、良くわからない。
     // submittingはsubmitボタンを押したらtrueになる
 
     // console.log('前前前前前前前前前前')
@@ -42,7 +42,7 @@ class EventsNew extends Component {
         <Field label="Body" name="body" type="text" component={this.renderField} />
 
         <div>
-          <input type="submit" value="Submit" disabled={pristine || submitting}/>
+          <input type="submit" value="Submit" disabled={pristine || submitting || invalid}/>
           <Link to="/">Cancel</Link>
         </div>
       </form>
